@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صرافی دریابی - خدمات ارزی و پولی مطمئن</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a237e;
+            --secondary: #00c853;
+            --accent: #ff6d00;
+            --dark: #0d1440;
+            --light: #f8f9ff;
+            --gray: #6c757d;
+            --text: #333333;
+            --danger: #f44336;
+            --warning: #ff9800;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Vazirmatn', sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* استایل‌های مشترک */
+        .btn {
+            padding: 0.7rem 1.8rem;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #00b347;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 200, 83, 0.3);
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #d32f2f;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 50%;
+            transform: translateX(50%);
+            width: 80px;
+            height: 4px;
+            background: var(--secondary);
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        /* هدر */
+        header {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%);
+            color: white;
+            padding: 1.2rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--secondary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: rotate(-10deg);
+        }
+
+        .logo-icon i {
+            font-size: 1.8rem;
+            color: white;
+        }
+
+        .logo-text h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .logo-text p {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2.2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.05rem;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--secondary);
+        }
+
+        nav a.active {
+            color: var(--secondary);
+        }
+
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--secondary);
+            border-radius: 3px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* بخش هیرو */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
+            color: white;
+            padding: 6rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" opacity="0.05"><polygon fill="white" points="0,1000 1000,0 1000,1000"/></svg>');
+            background-size: cover;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text h2 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.2rem;
+        }
+
+        .hero-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+
+        .currency-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .currency-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            color: var(--secondary);
+        }
+
+        .currency-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .currency-item:last-child {
+            border-bottom: none;
+        }
+
+        .currency-name {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .currency-flag {
+            width: 30px;
+            height: 20px;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .currency-rate {
+            font-weight: 600;
+        }
+
+        /* بخش نرخ ارز */
+        .exchange-rates {
+            padding: 5rem 0;
+            background: white;
+        }
+
+        .rates-container {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            margin-top: 2rem;
+        }
+
+        .rates-header {
+            background: var(--dark);
+            color: white;
+            padding: 1.5rem;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .rate-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            padding: 1.5rem;
+            text-align: center;
+            transition: background 0.3s;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .rate-row:hover {
+            background: #f8f9ff;
+        }
+
+        .rate-row:last-child {
+            border-bottom: none;
+        }
+
+        /* بخش خدمات */
+        .services {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #f8f9ff 0%, #f0f2ff 100%);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--secondary);
+            z-index: 2;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary), var(--dark));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            transform: rotate(-5deg);
+            transition: all 0.3s;
+        }
+
+        .service-card:hover .service-icon {
+            transform: rotate(0deg) scale(1.1);
+            background: linear-gradient(135deg, var(--secondary), #00b347);
+        }
+
+        .service-icon i {
+            font-size: 2.2rem;
+            color: white;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .service-card p {
+            color: var(--gray);
+        }
+
+        /* بخش درباره ما */
+        .about {
+            padding: 5rem 0;
+            background: white;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: #f8f9ff;
+            border-radius: 12px;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .image-frame {
+            position: absolute;
+            width: 80%;
+            height: 80%;
+            border: 5px solid var(--secondary);
+            border-radius: 15px;
+            bottom: -30px;
+            left: -30px;
+            z-index: -1;
+        }
+
+        /* بخش تماس */
+        .contact {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
+            color: white;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+        }
+
+        .contact-details {
+            list-style: none;
+        }
+
+        .contact-details li {
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .contact-details i {
+            color: var(--secondary);
+            font-size: 1.2rem;
+            margin-top: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s;
+            font-size: 1.2rem;
+        }
+
+        .social-links a:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        .map-container {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            height: 100%;
+            min-height: 400px;
+            background: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .map-container i {
+            font-size: 3rem;
+            color: var(--gray);
+        }
+
+        /* فوتر */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--secondary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #bbb;
+        }
+
+        /* پنل مدیریت */
+        .admin-panel {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            z-index: 2000;
+            overflow-y: auto;
+            padding: 2rem 0;
+        }
+
+        .admin-header {
+            background: var(--dark);
+            color: white;
+            padding: 1.5rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .admin-header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .admin-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 1rem;
+        }
+
+        .admin-tab {
+            padding: 0.8rem 1.5rem;
+            background: #f5f5f5;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .admin-tab.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .admin-content {
+            display: none;
+        }
+
+        .admin-content.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        .currency-list {
+            margin-top: 2rem;
+        }
+
+        .currency-item-admin {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            background: #f9f9f9;
+        }
+
+        .currency-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .admin-login {
+            max-width: 400px;
+            margin: 5rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .admin-login h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--dark);
+        }
+
+        /* رسپانسیو */
+        @media (max-width: 992px) {
+            .hero-content, .about-content, .contact-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .about-image {
+                order: -1;
+            }
+            
+            .hero-text h2 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu {
+                display: block;
+            }
+            
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                right: 0;
+                width: 100%;
+                background: var(--dark);
+                flex-direction: column;
+                padding: 1.5rem 0;
+                text-align: center;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                gap: 0;
+            }
+            
+            nav ul.active {
+                display: flex;
+            }
+            
+            nav ul li {
+                margin: 0.7rem 0;
+            }
+            
+            .header-actions {
+                display: none;
+            }
+            
+            .hero {
+                padding: 4rem 0;
+            }
+            
+            .hero-text h2 {
+                font-size: 2rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .rates-header, .rate-row {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+            
+            .about-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .service-card, .contact-info {
+                padding: 2rem 1.5rem;
+            }
+            
+            .stat-number {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- هدر -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>صرافی دریابی</h1>
+                        <p>خدمات ارزی و پولی مطمئن</p>
+                    </div>
+                </div>
+                
+                <div class="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+                
+                <nav>
+                    <ul>
+                        <li><a href="#" class="active">صفحه اصلی</a></li>
+                        <li><a href="#exchange-rates">نرخ ارز</a></li>
+                        <li><a href="#services">خدمات</a></li>
+                        <li><a href="#about">درباره ما</a></li>
+                        <li><a href="#contact">تماس با ما</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="header-actions">
+                    <button class="btn btn-primary" onclick="openAdminPanel()">
+                        <i class="fas fa-cog"></i>
+                        پنل مدیریت
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- بخش اصلی -->
+    <main>
+        <!-- بخش هیرو -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <h2>معاملات ارزی مطمئن با صرافی دریابی</h2>
+                        <p>با سال‌ها تجربه در زمینه خدمات پولی و ارزی، بهترین نرخ‌ها و سریع‌ترین تراکنش‌ها را به شما ارائه می‌دهیم. امنیت و رضایت شما اولویت ماست.</p>
+                        <div class="hero-buttons">
+                            <a href="#exchange-rates" class="btn btn-primary">
+                                <i class="fas fa-chart-line"></i>
+                                مشاهده نرخ ارز
+                            </a>
+                            <a href="#contact" class="btn btn-outline">
+                                <i class="fas fa-phone"></i>
+                                تماس با ما
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="hero-visual">
+                        <div class="currency-card">
+                            <h3>نرخ‌های برتر امروز</h3>
+                            <div id="hero-rates">
+                                <!-- نرخ‌های ارز اینجا لود می‌شوند -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- بخش نرخ ارز -->
+        <section id="exchange-rates" class="exchange-rates">
+            <div class="container">
+                <div class="section-title">
+                    <h2>نرخ ارز روز</h2>
+                    <p>آخرین نرخ‌های ارزهای اصلی در بازار افغانستان</p>
+                </div>
+                
+                <div class="rates-container">
+                    <div class="rates-header">
+                        <div>ارز</div>
+                        <div>خرید</div>
+                        <div>فروش</div>
+                    </div>
+                    <div id="rates-list">
+                        <!-- لیست نرخ ارزها اینجا لود می‌شود -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- بخش خدمات -->
+        <section id="services" class="services">
+            <div class="container">
+                <div class="section-title">
+                    <h2>خدمات ما</h2>
+                    <p>خدمات متنوع و با کیفیت ما برای رفع نیازهای مالی و ارزی شما</p>
+                </div>
+                
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-exchange-alt"></i>
+                        </div>
+                        <h3>معاملات ارزی</h3>
+                        <p>خرید و فروش بیش از ۲۰ ارز مختلف با بهترین نرخ‌ها در بازار و کمترین کارمزد</p>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-money-check"></i>
+                        </div>
+                        <h3>حواله ارزی</h3>
+                        <p>ارسال و دریافت حواله‌های ارزی به سراسر جهان با امنیت بالا و سرعت انتقال فوق‌العاده</p>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-coins"></i>
+                        </div>
+                        <h3>صرافی آنلاین</h3>
+                        <p>انجام معاملات آنلاین به صورت ۲۴ ساعته و ۷ روز هفته با پشتیبانی کامل</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- بخش درباره ما -->
+        <section id="about" class="about">
+            <div class="container">
+                <div class="section-title">
+                    <h2>درباره ما</h2>
+                    <p>با تیم حرفه‌ای و با تجربه صرافی دریابی آشنا شوید</p>
+                </div>
+                
+                <div class="about-content">
+                    <div class="about-text">
+                        <h2>تاریخچه و ماموریت ما</h2>
+                        <p id="about-description">صرافی دریابی با بیش از ۱۰ سال سابقه درخشان در زمینه خدمات پولی و ارزی، یکی از معتبرترین مراکز مالی در افغانستان است. ما با بهره‌گیری از تکنولوژی‌های روز و کادری مجرب، خدمات متنوع و با کیفیتی را به مشتریان خود ارائه می‌دهیم.</p>
+                        <p>ماموریت ما ارائه خدمات مالی مطمئن، سریع و با نرخ‌های رقابتی به مشتریان داخلی و بین‌المللی است. ما همواره در تلاش هستیم تا با رعایت بالاترین استانداردهای امنیتی و شفافیت در معاملات، اعتماد مشتریان خود را جلب نماییم.</p>
+                        
+                        <div class="about-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">۱۰+</div>
+                                <div class="stat-label">سال تجربه</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">۵۰,۰۰۰+</div>
+                                <div class="stat-label">مشتری راضی</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">۲۰+</div>
+                                <div class="stat-label">ارز مختلف</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="about-image">
+                        <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="درباره صرافی دریابی">
+                        <div class="image-frame"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- بخش تماس با ما -->
+        <section id="contact" class="contact">
+            <div class="container">
+                <div class="section-title">
+                    <h2>تماس با ما</h2>
+                    <p>برای دریافت مشاوره و اطلاعات بیشتر با ما در ارتباط باشید</p>
+                </div>
+                
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <h3>اطلاعات تماس</h3>
+                        <ul class="contact-details">
+                            <li>
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span id="contact-address">غزنی، مارکیت خراسان، بلاک سوم، منزل اول، دکان نمبر ۱۳۲ و ۱۳۳</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-phone"></i>
+                                <span id="contact-phone">۰۷۹۹۲۲۸۰۸۰</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-envelope"></i>
+                                <span id="contact-email">Daryabi2020@gmail.com</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-clock"></i>
+                                <span id="contact-hours">شنبه تا پنجشنبه: ۸:۰۰ صبح - ۱۷:۰۰ عصر<br>جمعه: ۹:۰۰ صبح - ۱۳:۰۰</span>
+                            </li>
+                        </ul>
+                        
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-telegram"></i></a>
+                            <a href="#"><i class="fab fa-facebook"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="map-container">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <p>نقشه موقعیت مکانی ما</p>
+                        <small>برای مشاهده نقشه بزرگ‌تر کلیک کنید</small>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- فوتر -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>درباره ما</h3>
+                    <p>صرافی دریابی با سابقه درخشان در زمینه خدمات پولی و ارزی، ارائه دهنده بهترین نرخ‌ها و سریع‌ترین خدمات به مشتریان می‌باشد. امنیت و رضایت شما اولویت ماست.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>لینک‌های سریع</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">صفحه اصلی</a></li>
+                        <li><a href="#exchange-rates">نرخ ارز</a></li>
+                        <li><a href="#services">خدمات ما</a></li>
+                        <li><a href="#about">درباره ما</a></li>
+                        <li><a href="#contact">تماس با ما</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>خدمات</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">معاملات ارزی</a></li>
+                        <li><a href="#">حواله ارزی</a></li>
+                        <li><a href="#">صرافی آنلاین</a></li>
+                        <li><a href="#">کارت‌های ارزی</a></li>
+                        <li><a href="#">مشاوره مالی</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>خبرنامه</h3>
+                    <p>برای دریافت آخرین نرخ ارز و اخبار بازار در خبرنامه ما عضو شوید</p>
+                    <div style="margin-top: 1rem; display: flex;">
+                        <input type="email" placeholder="ایمیل خود را وارد کنید" style="padding: 0.7rem; border: none; border-radius: 5px 0 0 5px; width: 70%;">
+                        <button style="padding: 0.7rem 1rem; background: var(--secondary); color: white; border: none; border-radius: 0 5px 5px 0; cursor: pointer;">عضویت</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>کلیه حقوق این وبسایت متعلق به صرافی دریابی می‌باشد. © ۲۰۲۳</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- پنل مدیریت -->
+    <div id="adminPanel" class="admin-panel">
+        <div class="admin-header">
+            <div class="container">
+                <div class="admin-header-content">
+                    <h2>پنل مدیریت صرافی دریابی</h2>
+                    <button class="btn btn-danger" onclick="closeAdminPanel()">
+                        <i class="fas fa-times"></i>
+                        بستن
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container">
+            <div class="admin-tabs">
+                <div class="admin-tab active" onclick="openAdminTab('rates')">مدیریت نرخ ارز</div>
+                <div class="admin-tab" onclick="openAdminTab('contact')">اطلاعات تماس</div>
+                <div class="admin-tab" onclick="openAdminTab('about')">درباره ما</div>
+            </div>
+            
+            <!-- تب مدیریت نرخ ارز -->
+            <div id="rates-tab" class="admin-content active">
+                <h3>افزودن ارز جدید</h3>
+                <form id="add-currency-form">
+                    <div class="form-group">
+                        <label for="currency-name">نام ارز</label>
+                        <input type="text" id="currency-name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="currency-buy">نرخ خرید</label>
+                        <input type="number" id="currency-buy" class="form-control" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="currency-sell">نرخ فروش</label>
+                        <input type="number" id="currency-sell" class="form-control" step="0.01" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-plus"></i>
+                        افزودن ارز
+                    </button>
+                </form>
+                
+                <div class="currency-list">
+                    <h3>لیست ارزها</h3>
+                    <div id="admin-currency-list">
+                        <!-- لیست ارزها برای مدیریت -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- تب اطلاعات تماس -->
+            <div id="contact-tab" class="admin-content">
+                <h3>ویرایش اطلاعات تماس</h3>
+                <form id="contact-form">
+                    <div class="form-group">
+                        <label for="contact-address-input">آدرس</label>
+                        <textarea id="contact-address-input" class="form-control" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-phone-input">شماره تماس</label>
+                        <input type="text" id="contact-phone-input" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-email-input">ایمیل</label>
+                        <input type="email" id="contact-email-input" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-hours-input">ساعات کاری</label>
+                        <textarea id="contact-hours-input" class="form-control" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i>
+                        ذخیره تغییرات
+                    </button>
+                </form>
+            </div>
+            
+            <!-- تب درباره ما -->
+            <div id="about-tab" class="admin-content">
+                <h3>ویرایش بخش درباره ما</h3>
+                <form id="about-form">
+                    <div class="form-group">
+                        <label for="about-description-input">توضیحات درباره ما</label>
+                        <textarea id="about-description-input" class="form-control" rows="6"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i>
+                        ذخیره تغییرات
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // داده‌های اولیه
+        const initialData = {
+            currencies: [
+                { name: "دلار آمریکا (USD)", buy: 66.30, sell: 66.80 },
+                { name: "یورو اروپا (EUR)", buy: 68.30, sell: 68.90 },
+                { name: "پوند انگلیس (GBP)", buy: 78.30, sell: 79.00 },
+                { name: "درهم امارات (AED)", buy: 19.00, sell: 19.20 }
+            ],
+            contact: {
+                address: "غزنی، مارکیت خراسان، بلاک سوم، منزل اول، دکان نمبر ۱۳۲ و ۱۳۳",
+                phone: "۰۷۹۹۲۲۸۰۸۰",
+                email: "Daryabi2020@gmail.com",
+                hours: "شنبه تا پنجشنبه: ۸:۰۰ صبح - ۱۷:۰۰ عصر\nجمعه: ۹:۰۰ صبح - ۱۳:۰۰"
+            },
+            about: {
+                description: "صرافی دریابی با بیش از ۱۰ سال سابقه درخشان در زمینه خدمات پولی و ارزی، یکی از معتبرترین مراکز مالی در افغانستان است. ما با بهره‌گیری از تکنولوژی‌های روز و کادری مجرب، خدمات متنوع و با کیفیتی را به مشتریان خود ارائه می‌دهیم."
+            }
+        };
+
+        // بارگذاری داده‌ها از localStorage یا استفاده از داده‌های اولیه
+        function loadData() {
+            const savedData = localStorage.getItem('daryabiData');
+            return savedData ? JSON.parse(savedData) : initialData;
+        }
+
+        // ذخیره داده‌ها در localStorage
+        function saveData(data) {
+            localStorage.setItem('daryabiData', JSON.stringify(data));
+        }
+
+        // بارگذاری و نمایش نرخ ارزها
+        function loadExchangeRates() {
+            const data = loadData();
+            const ratesList = document.getElementById('rates-list');
+            const heroRates = document.getElementById('hero-rates');
+            
+            ratesList.innerHTML = '';
+            heroRates.innerHTML = '';
+            
+            // نمایش در جدول اصلی
+            data.currencies.forEach(currency => {
+                const rateRow = document.createElement('div');
+                rateRow.className = 'rate-row';
+                rateRow.innerHTML = `
+                    <div>${currency.name}</div>
+                    <div>${currency.buy} AFN</div>
+                    <div>${currency.sell} AFN</div>
+                `;
+                ratesList.appendChild(rateRow);
+            });
+            
+            // نمایش در بخش هیرو (حداکثر ۴ ارز)
+            data.currencies.slice(0, 4).forEach(currency => {
+                const currencyItem = document.createElement('div');
+                currencyItem.className = 'currency-item';
+                currencyItem.innerHTML = `
+                    <div class="currency-name">
+                        <div class="currency-flag"></div>
+                        <span>${currency.name.split(' ')[0]}</span>
+                    </div>
+                    <div class="currency-rate">${currency.buy} AFN</div>
+                `;
+                heroRates.appendChild(currencyItem);
+            });
+        }
+
+        // بارگذاری اطلاعات تماس
+        function loadContactInfo() {
+            const data = loadData();
+            document.getElementById('contact-address').textContent = data.contact.address;
+            document.getElementById('contact-phone').textContent = data.contact.phone;
+            document.getElementById('contact-email').textContent = data.contact.email;
+            document.getElementById('contact-hours').innerHTML = data.contact.hours.replace(/\n/g, '<br>');
+            
+            // پر کردن فرم‌های مدیریت
+            document.getElementById('contact-address-input').value = data.contact.address;
+            document.getElementById('contact-phone-input').value = data.contact.phone;
+            document.getElementById('contact-email-input').value = data.contact.email;
+            document.getElementById('contact-hours-input').value = data.contact.hours;
+        }
+
+        // بارگذاری اطلاعات درباره ما
+        function loadAboutInfo() {
+            const data = loadData();
+            document.getElementById('about-description').textContent = data.about.description;
+            document.getElementById('about-description-input').value = data.about.description;
+        }
+
+        // بارگذاری لیست ارزها در پنل مدیریت
+        function loadAdminCurrencyList() {
+            const data = loadData();
+            const adminList = document.getElementById('admin-currency-list');
+            
+            adminList.innerHTML = '';
+            
+            data.currencies.forEach((currency, index) => {
+                const currencyItem = document.createElement('div');
+                currencyItem.className = 'currency-item-admin';
+                currencyItem.innerHTML = `
+                    <div>
+                        <strong>${currency.name}</strong><br>
+                        خرید: ${currency.buy} AFN | فروش: ${currency.sell} AFN
+                    </div>
+                    <div class="currency-actions">
+                        <button class="btn btn-danger" onclick="deleteCurrency(${index})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+                adminList.appendChild(currencyItem);
+            });
+        }
+
+        // افزودن ارز جدید
+        document.getElementById('add-currency-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('currency-name').value;
+            const buy = parseFloat(document.getElementById('currency-buy').value);
+            const sell = parseFloat(document.getElementById('currency-sell').value);
+            
+            const data = loadData();
+            data.currencies.push({ name, buy, sell });
+            saveData(data);
+            
+            loadExchangeRates();
+            loadAdminCurrencyList();
+            
+            // ریست کردن فرم
+            this.reset();
+            
+            alert('ارز جدید با موفقیت افزوده شد!');
+        });
+
+        // حذف ارز
+        function deleteCurrency(index) {
+            if (confirm('آیا از حذف این ارز اطمینان دارید؟')) {
+                const data = loadData();
+                data.currencies.splice(index, 1);
+                saveData(data);
+                
+                loadExchangeRates();
+                loadAdminCurrencyList();
+                
+                alert('ارز با موفقیت حذف شد!');
+            }
+        }
+
+        // ذخیره اطلاعات تماس
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const data = loadData();
+            data.contact.address = document.getElementById('contact-address-input').value;
+            data.contact.phone = document.getElementById('contact-phone-input').value;
+            data.contact.email = document.getElementById('contact-email-input').value;
+            data.contact.hours = document.getElementById('contact-hours-input').value;
+            
+            saveData(data);
+            loadContactInfo();
+            
+            alert('اطلاعات تماس با موفقیت به‌روزرسانی شد!');
+        });
+
+        // ذخیره اطلاعات درباره ما
+        document.getElementById('about-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const data = loadData();
+            data.about.description = document.getElementById('about-description-input').value;
+            
+            saveData(data);
+            loadAboutInfo();
+            
+            alert('اطلاعات درباره ما با موفقیت به‌روزرسانی شد!');
+        });
+
+        // مدیریت پنل مدیریت
+        function openAdminPanel() {
+            document.getElementById('adminPanel').style.display = 'block';
+            loadAdminCurrencyList();
+        }
+
+        function closeAdminPanel() {
+            document.getElementById('adminPanel').style.display = 'none';
+        }
+
+        function openAdminTab(tabName) {
+            // غیرفعال کردن همه تب‌ها
+            document.querySelectorAll('.admin-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.admin-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // فعال کردن تب انتخاب شده
+            document.querySelector(`.admin-tab:nth-child(${tabName === 'rates' ? 1 : tabName === 'contact' ? 2 : 3})`).classList.add('active');
+            document.getElementById(`${tabName}-tab`).classList.add('active');
+        }
+
+        // منوی موبایل
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            document.querySelector('nav ul').classList.toggle('active');
+        });
+        
+        // اسکرول نرم برای لینک‌ها
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // بستن منوی موبایل در صورت باز بودن
+                    document.querySelector('nav ul').classList.remove('active');
+                }
+            });
+        });
+        
+        // تغییر استایل هدر هنگام اسکرول
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.15)';
+                header.style.background = 'var(--dark)';
+            } else {
+                header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
+                header.style.background = 'linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%)';
+            }
+        });
+
+        // بارگذاری اولیه داده‌ها
+        window.addEventListener('DOMContentLoaded', function() {
+            loadExchangeRates();
+            loadContactInfo();
+            loadAboutInfo();
+        });
+    </script>
+</body>
+</html>
